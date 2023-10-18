@@ -28,6 +28,24 @@ class formInput extends StatefulWidget {
 }
 
 class _formInputState extends State<formInput> {
+  String? _jk;
+  void pilihJk(String value) {
+    setState(() {
+      _jk = value;
+    });
+  }
+
+  List<String> agama = [
+    "Islam",
+    "Kristen Khatolik",
+    "Kristen Protestan",
+    "Hindu",
+    "Budha",
+    "Lainnya"
+  ];
+
+  String _agama = "Islam";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,6 +93,43 @@ class _formInputState extends State<formInput> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            RadioListTile(
+              value: "Laki-Laki",
+              groupValue: _jk,
+              title: Text("Laki-Laki"),
+              onChanged: (String? value) {
+                pilihJk(value!);
+              },
+              activeColor: Colors.teal,
+              subtitle: Text("Pilih ini laki-laki"),
+            ),
+            RadioListTile(
+              value: "Perempuan",
+              groupValue: _jk,
+              title: Text("Perempuan"),
+              onChanged: (String? value) {
+                pilihJk(value!);
+              },
+              activeColor: Colors.teal,
+              subtitle: Text("Pilih ini perempuan"),
+            ),
+            DropdownButton<String>(
+              value: _agama,
+              items: agama.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                setState(() {
+                  _agama = newValue!;
+                });
+              },
             ),
           ],
         ),
