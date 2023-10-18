@@ -4,140 +4,77 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Latihan 1",
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Latihan 1"),
-          backgroundColor: Colors.amber,
-        ),
-        body: Column(
+      home: formInput(),
+    );
+  }
+}
+
+class formInput extends StatefulWidget {
+  const formInput({super.key});
+
+  @override
+  State<formInput> createState() => _formInputState();
+}
+
+class _formInputState extends State<formInput> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: Icon(Icons.list),
+        title: Text("Input Biodata"),
+        backgroundColor: Colors.teal,
+      ),
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: ListView(
           children: [
-            Text("Hello world"),
-            Text("Hello world"),
-            Text("Hello world"),
-            Row(
-              children: [
-                Text("data 1"),
-                Text("data 2 "),
-                Text("data 3 "),
-                Text("data 4 "),
-              ],
-            ),
-            Container(
-              height: 30,
-              width: 500,
-              color: Colors.lightBlue,
+            TextField(
+              decoration: InputDecoration(
+                hintText: "Nama Lengkap",
+                labelText: "Nama Lengkap",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
             ),
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 30,
-                  width: 30,
-                  color: Colors.lightBlue,
+            TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                hintText: "Password",
+                labelText: "Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  color: Colors.lightBlue,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  color: Colors.lightBlue,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  color: Colors.lightBlue,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  color: Colors.lightBlue,
-                ),
-              ],
+              ),
             ),
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    shape: BoxShape.circle,
-                  ),
+            TextField(
+              maxLength: 100,
+              maxLines: 3,
+              decoration: InputDecoration(
+                hintText: "Alamat",
+                labelText: "Alamat",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 30,
-                  width: 30,
-                  decoration: BoxDecoration(
-                    color: Colors.lightBlue,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),
