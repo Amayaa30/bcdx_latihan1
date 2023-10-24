@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +29,8 @@ class formInput extends StatefulWidget {
 }
 
 class _formInputState extends State<formInput> {
+  TextEditingController var_tanggal = TextEditingController();
+
   String? _jk;
   void pilihJk(String value) {
     setState(() {
@@ -45,6 +48,41 @@ class _formInputState extends State<formInput> {
   ];
 
   String _agama = "Islam";
+
+  void dispose() {
+    var_tanggal.dispose();
+    super.dispose();
+  }
+
+  String formatDate(DateTime date) {
+    return DateFormat('dd/MM/yyyy').format(date);
+  }
+
+  DateTime selectedDate = DateTime.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101),
+        builder: (BuildContext context, Widget? child) {
+          return Theme(
+            data: ThemeData.light().copyWith(
+              primaryColor: Colors.teal,
+              hintColor: Colors.teal,
+              colorScheme: ColorScheme.light(primary: Colors.teal),
+            ),
+            child: child!,
+          );
+        });
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        var_tanggal.text = formatDate(selectedDate).toString();
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +168,23 @@ class _formInputState extends State<formInput> {
                   _agama = newValue!;
                 });
               },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextField(
+              controller: var_tanggal,
+              readOnly: true,
+              decoration: InputDecoration(
+                  hintText: "Tanggal Lahir",
+                  labelText: "Tanggal Lahir",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () => _selectDate(context),
+                    icon: Icon(Icons.calendar_today),
+                  )),
             ),
           ],
         ),
